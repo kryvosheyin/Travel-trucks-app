@@ -1,0 +1,45 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input {
+  border-radius: 12px;
+  padding: 18px;
+  width: 100%;
+  height: 40px;
+  background: var(--inputs);
+  border: none;
+  outline: none;
+  line-height: 1.5;
+  color: var(--main);
+}
+
+@media screen and (min-width: 1440px) {
+  .input {
+    height: 60px;
+    padding: 18px;
+  }
+}
+
+.input.comment {
+  height: 118px;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+.btn {
+  align-self: center;
+}
+
+.error {
+  color: var(--button-hover);
+  font-size: 12px;
+}

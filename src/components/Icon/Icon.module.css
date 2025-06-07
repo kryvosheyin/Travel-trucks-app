@@ -1,0 +1,85 @@
+.icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  outline: none;
+}
+
+@media screen and (min-width: 1440px) {
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.small {
+  width: 16px;
+  height: 16px;
+}
+
+@media screen and (min-width: 1440px) {
+  .small {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.smallest {
+  width: 16px;
+  height: 16px;
+}
+
+.iconHeart {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: fill var(--animation-cubicBezier);
+}
+
+.iconHeart:focus,
+.iconHeart.active {
+  fill: var(--button);
+  outline: none;
+}
+
+@media (hover: hover) {
+  .iconHeart:hover {
+    fill: var(--button);
+  }
+}
+
+.iconMap {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  fill: var(--text);
+}
+
+.iconMap:hover,
+.iconMap:focus,
+.active {
+  fill: var(--main);
+}
+
+@media screen and (min-width: 768px) {
+  .iconMap {
+    width: 20px;
+    height: 20px;
+    top: 18px;
+    left: 20px;
+  }
+}
+
+.iconStar {
+  width: 16px;
+  height: 16px;
+  fill: var(--rating);
+}
+
+.iconStarEmpty {
+  width: 16px;
+  height: 16px;
+  fill: var(--badges);
+}

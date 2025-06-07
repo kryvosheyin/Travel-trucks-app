@@ -1,0 +1,41 @@
+.equipmentList {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  max-height: 71px;
+  overflow-y: auto;
+}
+
+.equipmentList.grab {
+  cursor: grab;
+}
+
+.equipmentList:active {
+  cursor: grabbing;
+}
+
+.equipmentList::-webkit-scrollbar {
+  display: none;
+}
+
+.equipmentList:hover::-webkit-scrollbar {
+  display: block;
+  width: 4px;
+}
+
+.equipmentList:hover::-webkit-scrollbar-thumb {
+  background: var(--gray-light);
+  border-radius: 4px;
+}
+
+.equipmentList:hover::-webkit-scrollbar-track {
+  background: var(--inputs);
+  border-radius: 4px;
+}
+
+@media screen and (min-width: 1440px) {
+  .equipmentList {
+    gap: 8px;
+    max-height: 104px;
+  }
+}
