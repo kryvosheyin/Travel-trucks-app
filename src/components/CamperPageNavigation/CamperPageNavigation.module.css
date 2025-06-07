@@ -1,0 +1,41 @@
+.menu {
+  display: flex;
+  gap: 18px;
+  border-bottom: 1px solid var(--gray-light);
+  padding-bottom: 14px;
+}
+
+@media screen and (min-width: 1440px) {
+  .menu {
+    gap: 40px;
+    padding-bottom: 24px;
+  }
+}
+
+.link {
+  position: relative;
+  padding-bottom: 14px;
+  font-size: var(--font-small);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--main);
+}
+
+@media screen and (min-width: 1440px) {
+  .link {
+    padding-bottom: 24px;
+    font-size: var(--font-medium);
+  }
+}
+
+.link:hover::after,
+.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 5px;
+  background-color: var(--button);
+  transition: width var(--animation-cubicBezier);
+}
