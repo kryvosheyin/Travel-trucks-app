@@ -1,11 +1,9 @@
 import * as Yup from "yup";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import DatePicker from "react-datepicker";
-import { useState } from "react";
 import enGB from "date-fns/locale/en-GB";
 import Button from "@components/Button/Button";
 import { toastAlert } from "@utils/toastAlert";
-
 import clsx from "clsx";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./BookingForm.module.css";
@@ -23,7 +21,10 @@ const FormSchema = Yup.object().shape({
     .min(3, "Please enter at least 3 characters.")
     .trim()
     .required("Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Email is required")
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email format"),
   dateRange: Yup.object()
     .shape({
       start: Yup.date().required("Start date is required"),
@@ -33,18 +34,14 @@ const FormSchema = Yup.object().shape({
   comment: Yup.string().trim(),
 });
 
-const BookingForm = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(today.getDate() + 1);
 
+const BookingForm = () => {
   const handleSubmit = (values, { resetForm }) => {
     toastAlert.success(`Dear ${values.name}, your booking is confirmed!`);
     resetForm();
-    setStartDate(null);
-    setEndDate(null);
   };
 
   return (
@@ -53,7 +50,7 @@ const BookingForm = () => {
       validationSchema={FormSchema}
       onSubmit={handleSubmit}
     >
-      {({ setFieldValue }) => (
+      {({ setFieldValue, values }) => (
         <Form className={css.form}>
           <div className={css.field}>
             <Field
@@ -76,18 +73,15 @@ const BookingForm = () => {
 
           <div className={css.field}>
             <DatePicker
-              selected={startDate}
-              onChange={(dates) => {
-                const [start, end] = dates;
-                setStartDate(start);
-                setEndDate(end);
+              selected={values.dateRange.start}
+              onChange={([start, end]) => {
                 setFieldValue("dateRange", { start, end });
               }}
-              startDate={startDate}
-              endDate={endDate}
+              startDate={values.dateRange.start}
+              endDate={values.dateRange.end}
               selectsRange
-              closeOnScroll={true}
-              minDate={tomorrow}
+              closeOnScroll
+              minDate={today}
               locale={enGB}
               dateFormat="MMMM d, yyyy"
               placeholderText="Booking date*"

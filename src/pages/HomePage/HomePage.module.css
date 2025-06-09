@@ -1,0 +1,105 @@
+.main {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  color: var(--inputs);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: var(--gray-light);
+  animation: backgroundAnimation 40s infinite ease-in-out;
+}
+
+@keyframes backgroundAnimation {
+  0%,
+  30%,
+  100% {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url(@assets/hero/hero_1.webp);
+  }
+  33%,
+  63% {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url(@assets/hero/hero_2.webp);
+  }
+  66%,
+  99% {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url(@assets/hero/hero_3.webp);
+  }
+}
+
+@media (min-resolution: 192dpi) or (min-resolution: 2dppx) {
+  @keyframes backgroundAnimation {
+    0%,
+    30%,
+    100% {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url(@assets/hero/hero_1@2x.webp);
+    }
+    33%,
+    63% {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url(@assets/hero/hero_2@2x.webp);
+    }
+    66%,
+    99% {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url(@assets/hero/hero_3@2x.webp);
+    }
+  }
+}
+
+@media (min-resolution: 288dpi) or (min-resolution: 3dppx) {
+  @keyframes backgroundAnimation {
+    0%,
+    30%,
+    100% {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url(@assets/hero/hero_1@3x.webp);
+    }
+    33%,
+    63% {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url(@assets/hero/hero_2@3x.webp);
+    }
+    66%,
+    99% {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url(@assets/hero/hero_3@3x.webp);
+    }
+  }
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 48px;
+    line-height: 0.66667;
+  }
+}
+
+.text {
+  font-weight: 600;
+  font-size: var(--font-small);
+  line-height: 1.33333;
+  margin-top: 16px;
+  margin-bottom: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .text {
+    font-size: var(--font-large);
+  }
+}
+
+.link {
+  display: block;
+  width: 100%;
+  padding: 16px 0;
+}

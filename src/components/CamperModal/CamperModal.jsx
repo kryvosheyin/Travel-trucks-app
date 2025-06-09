@@ -1,8 +1,8 @@
-import Modal from 'react-modal';
+import Modal from "react-modal";
 
-import css from './CamperModal.module.css';
+import css from "./CamperModal.module.css";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 const CamperModal = ({ isOpen, onClose, name, imgSrc }) => {
   return (

@@ -1,30 +1,25 @@
-import { NavLink } from 'react-router-dom';
-import clsx from 'clsx';
+import { NavLink } from "react-router-dom";
+import clsx from "clsx";
+import css from "./CamperPageNavigation.module.css";
 
-import css from './CamperPageNavigation.module.css';
+const navItems = [
+  { to: "features", label: "Features" },
+  { to: "reviews", label: "Reviews" },
+];
 
-export const CamperPageNavigation = () => {
-  return (
-    <ul className={css.menu}>
-      <li>
+const CamperPageNavigation = () => (
+  <ul className={css.menu}>
+    {navItems.map(({ to, label }) => (
+      <li key={to}>
         <NavLink
-          to="features"
+          to={to}
           className={({ isActive }) => clsx(css.link, isActive && css.active)}
         >
-          Features
+          {label}
         </NavLink>
       </li>
-
-      <li>
-        <NavLink
-          to="reviews"
-          className={({ isActive }) => clsx(css.link, isActive && css.active)}
-        >
-          Reviews
-        </NavLink>
-      </li>
-    </ul>
-  );
-};
+    ))}
+  </ul>
+);
 
 export default CamperPageNavigation;

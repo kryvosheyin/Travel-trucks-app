@@ -5,52 +5,69 @@ import Icon from "@components/Icon/Icon";
 const CamperImage = ({ name, gallery = [] }) => {
   const [activeIdx, setActiveIdx] = useState(0);
 
-  const handleImageIncrement = () => {
-    setActiveIdx((prev) => (prev + 1) % gallery.length);
-  };
+  if (!gallery.length) {
+    return (
+      <div className={css.wrapper}>
+        <div className={css.noImage}>No image available</div>
+      </div>
+    );
+  }
 
-  const handleImageDecrement = () => {
+  const goToNext = () => setActiveIdx((prev) => (prev + 1) % gallery.length);
+  const goToPrev = () =>
     setActiveIdx((prev) => (prev - 1 + gallery.length) % gallery.length);
-  };
+
+  const currentImg = gallery[activeIdx];
+  const imageAlt = `${name} image ${activeIdx + 1} of ${gallery.length}`;
 
   return (
     <div className={css.wrapper}>
-      <button
-        type="button"
-        onClick={handleImageIncrement}
-        aria-label="Next Image"
-        className={`${css.chevron} ${css.right}`}
-      >
-        <Icon name="icon-chevron_right" className="small" />
-      </button>
-      <button
-        type="button"
-        onClick={handleImageDecrement}
-        aria-label="Previous Image"
-        className={`${css.chevron} ${css.left}`}
-      >
-        <Icon name="icon-chevron_left" className="small" />
-      </button>
-      <div className={css.dot_buttons}>
-        {Array.from({ length: gallery.length }, (_, index) => (
+      {gallery.length > 1 && (
+        <>
           <button
-            key={index}
             type="button"
-            onClick={() => setActiveIdx(index)}
-            disabled={index === activeIdx}
-            aria-disabled={index === activeIdx}
-            aria-label={`Image ${index + 1}`}
-            className={css.dot_button}
+            onClick={goToPrev}
+            aria-label="Previous Image"
+            className={`${css.chevron} ${css.left}`}
           >
-            <span aria-hidden="true"></span>
+            <Icon name="icon-chevron_left" className={css.iconSmall} />
           </button>
-        ))}
-      </div>
+          <button
+            type="button"
+            onClick={goToNext}
+            aria-label="Next Image"
+            className={`${css.chevron} ${css.right}`}
+          >
+            <Icon name="icon-chevron_right" className={css.iconSmall} />
+          </button>
+        </>
+      )}
+
       <img
-        src={gallery[activeIdx].thumb}
-        alt={name}
+        src={currentImg.thumb}
+        alt={imageAlt}
         className={css.camperImage}
+        loading="lazy"
       />
+
+      {gallery.length > 1 && (
+        <div className={css.dot_buttons}>
+          {gallery.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => setActiveIdx(index)}
+              disabled={index === activeIdx}
+              aria-disabled={index === activeIdx}
+              aria-label={`Show image ${index + 1}`}
+              className={css.dot_button}
+              tabIndex={index === activeIdx ? -1 : 0}
+            >
+              <span aria-hidden="true"></span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
