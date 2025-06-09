@@ -1,32 +1,31 @@
 import { useSelector } from "react-redux";
+
 import Icon from "@components/Icon/Icon";
 import { selectCamperById } from "@redux/campers/selectors";
+
 import css from "./Reviews.module.css";
 
-const MAX_STARS = 5;
-
 const Reviews = () => {
-  const { reviews = [] } = useSelector(selectCamperById) || {};
+  const { reviews } = useSelector(selectCamperById);
 
-  if (reviews.length === 0) return <p className={css.noReviews}>No reviews</p>;
+  if (!reviews?.length) return <p className={css.noReviews}>No reviews</p>;
 
-  const renderStars = (rating) =>
-    Array.from({ length: MAX_STARS }, (_, i) => (
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }, (_, index) => (
       <Icon
-        key={i}
+        key={index}
         name="icon-star"
-        className={i < rating ? css.iconStar : css.iconStarEmpty}
+        className={index < rating ? "iconStar" : "iconStarEmpty"}
       />
     ));
+  };
 
   return (
     <ul className={css.list}>
-      {reviews.map(({ reviewer_name, reviewer_rating, comment }, idx) => (
-        <li className={css.item} key={`${reviewer_name}-${idx}`}>
+      {reviews.map(({ reviewer_name, reviewer_rating, comment }) => (
+        <li className={css.item} key={reviewer_name}>
           <div className={css.header}>
-            <p className={css.avatar}>
-              {reviewer_name?.[0]?.toUpperCase() || "?"}
-            </p>
+            <p className={css.avatar}>{reviewer_name[0].toUpperCase()}</p>
             <div className={css.info}>
               <p className={css.name}>{reviewer_name}</p>
               <p className={css.rating}>{renderStars(reviewer_rating)}</p>
